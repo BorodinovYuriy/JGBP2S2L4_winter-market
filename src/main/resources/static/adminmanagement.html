@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="adminmanagement.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="indexController">
+
+    <h1>Winter Market</h1>
+    <h2 style="color: red">Administration page</h2>
+
+    <h4>Фильтр</h4>
+    <form novalidate ng-submit = "loadProducts()">
+        <div class="form-floating input-group-sn" style="width: 300px;">
+            <input type="text" class="form-control" id="filterTitle" placeholder="title part" ng-model="filter.title_part">
+        </div>
+        <div class="form-floating input-group-sn" style="width: 300px;">
+            <input type="number" class="form-control" id="filterMinPrice" placeholder="min" ng-model="filter.min_price">
+        </div>
+        <div class="form-floating input-group-sn" style="width: 300px;">
+            <input type="number" class="form-control" id="filterMaxPrice" placeholder="max" ng-model="filter.max_price">
+        </div>
+        <button class="btn btn-success" type="submit" >Применить</button>
+        <br>
+        <br>
+    </form>
+
+    <br>
+    <table class ="table table-hover" cellpadding="0" cellspacing="0">
+        <!--заголовки -->
+        <tr>
+            <td>id</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Инфо</td>
+            <td>Удаление продукта</td>
+        </tr>
+        <!--тело  -->
+        <tbody>
+        <!--for-each-->
+        <tr ng-repeat="p in productList">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>{{p.price}}</td>
+            <td>
+                <button class="btn btn-success" ng-click="showProductInfo(p.id)">Инфо</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Удалить продукт</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <button class="btn btn-secondary"  ng-click="change_page(- 1)" >Назад </button>
+        <button class="btn btn-secondary" ng-click="change_page(1)" >Вперёд</button>
+    </div>
+    <h1>Добавление нового продукта</h1>
+    <form ng-submit="submitCreateNewProduct()">
+
+        <label>
+            <input type="text" name="title" ng-model="newProduct.title" id="title" placeholder="title" required>
+        </label>
+
+        <label>
+            <input type="number" name="price" ng-model="newProduct.price" id="price" placeholder="price" required>
+        </label>
+        <button class="btn btn-success" type="submit" >Сохранить товар</button>
+    </form>
+
+</div>
+</body>
+</html>
+
+
