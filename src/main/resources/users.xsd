@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.borodinov.ru/spring/ws/users"
+        targetNamespace="http://www.borodinov.ru/spring/ws/users" elementFormDefault="qualified">
+
+    <xs:element name="getUserByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                                    <!--поле/тип-->
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllUsersRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="getUserByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="user" type="tns:userSoap"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllUsersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="users" maxOccurs="unbounded" type="tns:userSoap"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="userSoap">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

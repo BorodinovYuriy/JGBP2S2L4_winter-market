@@ -10,9 +10,5 @@ import ru.gb.spring.wintermarket.repositories.OrderRepository;
 @RequiredArgsConstructor
 public class OrderItemService {
     OrderItemRepository orderItemRepository;
-    private final OrderRepository orderRepository;
 
-    public void save(OrderItem orderItem) {
-        orderItemRepository.save(orderItem);
-    }
 }
