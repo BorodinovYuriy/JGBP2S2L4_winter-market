@@ -21,7 +21,6 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ProductService productService;
     private final CartService cartService;
-    private final OrderItemService orderItemService;
 
     @Transactional
     public void createOrder(User user){
@@ -33,6 +32,7 @@ public class OrderService {
         order.setTotalPrice(cart.getTotalPrice());
 
         for(CartItem cartItem : cart.getItems()){
+            if(productService.findById(cartItem.getProductId()).isPresent()){
                 Optional<Product> product = productService.findById(cartItem.getProductId());
 
                 OrderItem orderItem = new OrderItem(
@@ -44,11 +44,11 @@ public class OrderService {
                         cartItem.getPrice() );
 
                 orderItemList.add(orderItem);
-
+            }
         }
-
         order.setItems(orderItemList);
         orderRepository.save(order);
+
         cart.clear();
     }
 

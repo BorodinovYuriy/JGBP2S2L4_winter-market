@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.gb.spring.wintermarket.entity.Role;
 import ru.gb.spring.wintermarket.entity.User;
 import ru.gb.spring.wintermarket.repositories.UserRepository;
+import ru.gb.spring.wintermarket.soap.soapEntity.UserSoap;
+
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -40,4 +43,7 @@ public class UserService implements UserDetailsService {
                         new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 }
